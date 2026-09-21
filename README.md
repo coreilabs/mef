@@ -46,6 +46,7 @@ Para manter consistência entre páginas, altere os textos, modelos e dados em `
 
 ## Comportamento e limites desta etapa
 
+- Open Graph e Twitter Cards estão presentes no HTML de todas as páginas, usando títulos e descrições correspondentes, URLs absolutas em `https://coreilabs.github.io/mef/` e a imagem compartilhada `assets/images/opengraph.png` (1200 × 630 px). Artigos usam `og:type=article`; demais páginas usam `website`. A URL canônica da inicial termina em `/mef/`, e as demais mantêm seus nomes `.html`. A prévia social depende de os arquivos estarem publicados nessas URLs.
 - Menu mobile com estado acessível, fechamento por Escape e links de navegação; FAQ com `details` e `summary` nativos.
 - Links de WhatsApp, telefone e e-mail preservam os contatos do site consultado. Não houve envio de mensagens nem publicação remota.
 - Artigos, datas e estimativas de leitura são demonstrativos e estão identificados nas páginas. Substituir por conteúdo revisado na implantação.

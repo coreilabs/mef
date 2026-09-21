@@ -4,6 +4,8 @@ from html import escape
 import json
 
 ROOT = Path(__file__).resolve().parent.parent
+SITE_URL = 'https://coreilabs.github.io/mef/'
+OG_IMAGE = SITE_URL + 'assets/images/opengraph.png'
 WA = 'https://wa.me/556191565342?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.'
 ARROW = '<span class="arrow" aria-hidden="true">↗</span>'
 SEARCH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>'
@@ -51,9 +53,31 @@ def footer():
 <a class="floating-contact" href="{WA}" target="_blank" rel="noopener noreferrer" aria-label="Conversar pelo WhatsApp (abre em nova aba)">{CHAT}</a>'''
 
 def write(name, title, body, active='', description='Atendimento humanizado, orientação personalizada e apoio para você e sua família. M&F Renova Vida.'):
+    page_url = SITE_URL + ('' if name == 'index.html' else name)
+    social_title = escape(title + ' | Renova Vida', quote=True)
+    social_description = escape(description, quote=True)
+    page_type = 'article' if any(post['url'] == name for post in POSTS) else 'website'
     html = f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{escape(title)} | Renova Vida</title>
 <meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#fffefa">
+<link rel="canonical" href="{page_url}">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="M&amp;F Renova Vida">
+<meta property="og:type" content="{page_type}">
+<meta property="og:title" content="{social_title}">
+<meta property="og:description" content="{social_description}">
+<meta property="og:url" content="{page_url}">
+<meta property="og:image" content="{OG_IMAGE}">
+<meta property="og:image:secure_url" content="{OG_IMAGE}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="M&amp;F Renova Vida — logotipo dourado sobre fundo preto">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{social_title}">
+<meta name="twitter:description" content="{social_description}">
+<meta name="twitter:image" content="{OG_IMAGE}">
+<meta name="twitter:image:alt" content="M&amp;F Renova Vida — logotipo dourado sobre fundo preto">
 <link rel="icon" type="image/png" href="assets/images/logo.png"><link rel="preload" href="assets/fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/styles.css"><script src="assets/js/posts.js" defer></script><script src="assets/js/main.js" defer></script></head>
 <body>{header(active)}<main id="conteudo">{body}</main>{footer()}</body></html>'''
