@@ -389,7 +389,7 @@ p {
 }
 .process-image {
   width: 100%;
-  height: 330px;
+  height: auto;
   object-fit: cover;
   object-position: center 42%;
   border-radius: var(--radius);
